@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch, Router} from "react-router-dom";
+import AnimalsList from "./components/AnimalsList";
+import SelectedAnimalsList from "./components/SelectedAnimalsList";
+import { createBrowserHistory } from "history";
+import "antd/dist/antd.css";
+import {Button} from 'antd';
 
+const history = createBrowserHistory();
 class App extends Component {
+  navigate(path){
+    history.push(path);
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <Router history = {history}>
+        <div>
+          <div>
+              <Button type="primary" size ="large" onClick = {()=>this.navigate('/SelectedAnimals')}>CONTINUE</Button>
+          </div>
+          <Switch>
+          <Route path = "/" exact component = {AnimalsList} />
+          <Route path = "/SelectedAnimals" exact component = {SelectedAnimalsList} />
+          </Switch>
+          </div>
+        </Router>
     );
   }
 }
