@@ -73,7 +73,7 @@ class AnimalsList extends React.Component {
             <Row  type = "flex" justify = "center" align = "middle">
                 <Col span = {10}>
                 <Card title="SELECT SOME ANIMALS" hoverable = {true} loading = {!this.state.listLoaded}
-                style= {{marginTop: '20%', backgroundColor: '#f5f5f5', boxShadow: '1px 2px 1px #9E9E9E'}}
+                style= {{marginTop: '20%', backgroundColor: '#f5f5f5', boxShadow: '1px 2px 1px #9E9E9E', borderRadius: '20px'}}
                 headStyle= {{borderBottom: '1px solid #c1c1c1'}}
                 >
                 <div style = {{height: window.innerHeight *.60, overflowY:'scroll'}}>

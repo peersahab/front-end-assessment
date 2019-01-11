@@ -25,11 +25,13 @@ class App extends Component {
           <div>
           {history.location.pathname === '/'?(
             <Affix style={{position:'absolute', bottom: '4%', right:'29%'}} offsetTop = {10}>
-              <Button type="primary" size ="large" onClick = {()=>this.navigate('/SelectedAnimals')}>CONTINUE</Button>
+              <Button style={{borderRadius: '20px'}} type="primary" size ="large" onClick = {()=>this.navigate('/SelectedAnimals')}>CONTINUE</Button>
             </Affix>
           ):(
-            <Button type="primary" size ="large" onClick = {()=>this.navigate('/')}>BACK</Button>
- 
+            <Affix style={{position:'absolute', bottom: '4%', right:'29%'}} offsetBottom = {10}>
+
+            <Button style={{borderRadius: '20px'}} type="primary" size ="large" onClick = {()=>this.navigate('/')}>BACK</Button>
+            </Affix>
           )}
           </div>
           <Switch>
