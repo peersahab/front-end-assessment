@@ -6,14 +6,14 @@ var SRC_DIR = path.resolve(__dirname, "src");
 var config = {
     mode: "development",
     entry: ['babel-polyfill', SRC_DIR + "\\app\\index.js"], //where to start transpiling from
-    output: {
+    output: { //how & where to output bundle, assests etc
         path: DIST_DIR + "/app",
         filename: "bundle.js",
         publicPath: "/app/"
     },
     devServer: {
-        contentBase: "./src/app",
-        hot: true
+        contentBase: "./src/app", //where to serve content from
+        hot: true //hot module replacement
     },
     module: {
         rules: [

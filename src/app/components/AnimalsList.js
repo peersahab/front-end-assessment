@@ -13,7 +13,14 @@ class AnimalsList extends React.Component {
 
     componentDidMount(){
         console.log('Animal List Mounted');
-        this.getAnimalsList();
+        console.log('Length --> ' + this.props.animalsList.allAnimals.length);
+        if(this.props.animalsList.allAnimals.length == 0){
+            this.getAnimalsList();
+        }
+        else{
+            this.setState({listLoaded: true});
+        }
+        
     }
     async getAnimalsList() {
         try {
@@ -26,48 +33,31 @@ class AnimalsList extends React.Component {
         var list = [];
         list = responseJSON;
         this.props.dispatch(storeList(list));
-        this.setState({listLoaded: true}, ()=>this.checkPrevSelected());
+        this.setState({listLoaded: true}) //, ()=>this.checkPrevSelected());
         } catch (error) {
           console.error(error);
         }
       }
 
-      checkPrevSelected(animal){
-        
-        if(this.props.selectedAnimalsList.indexOf(animal) >= 0){
-            return true;
-        }
-        else{
-            return false;
-        }
-            
-        }
-      
 
       animalSelected = (e) => {
           console.log(e.target.value +', Selected --> ' + e.target.checked);
           if(e.target.checked)
         {  
-           var list = new Array();
-         if(this.props.selectedAnimalsList !== undefined){
-            list = this.props.selectedAnimalsList;
-            list.push(e.target.value);
-         }
-         else{
-             list.push(e.target.value);
-         }
-         
-          //console.log(list);
-          this.props.dispatch(selectAnimal(list));
+            this.props.dispatch(selectAnimal(e.target.value));
         }
         else{
             this.props.dispatch(removeAnimal(e.target.value));
         }
+        
           
           
       }
     
     render() { 
+        console.group("props");
+        console.log(this.props);
+        console.groupEnd();
         return ( 
             
             <Row  type = "flex" justify = "center" align = "middle">
@@ -80,7 +70,7 @@ class AnimalsList extends React.Component {
 
             {this.state.listLoaded?
             (
-                <List dataSource = {this.props.animalsList}
+                <List dataSource = {this.props.animalsList.allAnimals}
                     renderItem={animal => (
               <List.Item>
                 <List.Item.Meta
@@ -88,7 +78,7 @@ class AnimalsList extends React.Component {
                   title={animal}
                   
                 />
-                <Checkbox style = {{marginRight: '10%'}} defaultChecked = {this.checkPrevSelected(animal)} value = {animal} onChange = {this.animalSelected}></Checkbox>
+                <Checkbox style = {{marginRight: '10%'}} defaultChecked = {this.props.animalsList.selectedAnimals.includes(animal)} value = {animal} onChange = {this.animalSelected}></Checkbox>
               </List.Item>
             )}
             >
@@ -111,10 +101,14 @@ class AnimalsList extends React.Component {
 }
 
 const mapstateToProps = (state) => {
+    console.group("Map State To Props:");
+    console.log(state);
+    console.groupEnd();
     return(
       {
-        animalsList: state.animalsList,
-        selectedAnimalsList: state.selectedAnimalsList
+          animalsList: state.animals
+        //animalsList: state.animalsList,
+        //selectedAnimalsList: state.selectedAnimalsList
   });
    
   };

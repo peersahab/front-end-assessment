@@ -12,7 +12,7 @@ class SelectedAnimalsList extends React.Component {
     }
     render() {
         
-        const count = this.props.selectedAnimalsList.length;
+        const count = this.props.animalsList.allAnimals.length;
         return (
             <Row type = "flex" justify = "center" align = "middle">
             <Col span = {10}>
@@ -22,16 +22,19 @@ class SelectedAnimalsList extends React.Component {
                 >
                 <div style = {{height: window.innerHeight *.60, overflowY:'scroll'}}>
         
-            <List dataSource = {this.props.selectedAnimalsList}
+            <List dataSource = {this.props.animalsList.selectedAnimals}
                 
             renderItem={animal => (
-                <List.Item>
+                
+                    <List.Item>
                     <List.Item.Meta
                     avatar={<Avatar size="large" style={{ color: 'white', backgroundColor: 'rgba(24,144,255)' }}>{`${animal}`.substr(0,1)}</Avatar>}
                     title={animal}
                     />
                 
                 </List.Item>
+                
+               
             )}
         >
             </List>
@@ -46,7 +49,7 @@ class SelectedAnimalsList extends React.Component {
 const mapStateToProps = (state) => {
     return(
       {
-        selectedAnimalsList: state.selectedAnimalsList
+        animalsList: state.animals
   });
    
   };

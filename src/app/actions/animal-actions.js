@@ -1,9 +1,9 @@
-
 export const STORE_ANIMALS = 'animals: storeAnimalsList';
 export const SELECT_ANIMAL = 'animals: selectAnimal';
-export const REMOVE_ANIMAL = 'animals: removeAnimal';
+ export const REMOVE_ANIMAL = 'animals: removeAnimal';
 
 export function storeList(list){
+
     return{
         type: STORE_ANIMALS,
         payload:{
@@ -12,11 +12,11 @@ export function storeList(list){
     }
 }
 
-export function selectAnimal(selectedAnimals){
+export function selectAnimal(selectedAnimal){
     return{
         type: SELECT_ANIMAL,
         payload:{
-            selectedAnimalsList: selectedAnimals
+            selectedAnimal: selectedAnimal
         }
     }
 }
@@ -25,7 +25,7 @@ export function removeAnimal(selectedAnimal){
     return{
         type: REMOVE_ANIMAL,
         payload:{
-            selectedAnimalToRemove: selectedAnimal
+            animalToRemove: selectedAnimal
         }
     }
 }

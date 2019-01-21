@@ -1,23 +1,26 @@
-import { STORE_ANIMALS, SELECT_ANIMAL, REMOVE_ANIMAL } from "../actions/animal-actions";
-export function animalReducer(state = [], {type, payload}){
+import { STORE_ANIMALS, SELECT_ANIMAL, REMOVE_ANIMAL} from "../actions/animal-actions";
+const initialState = {
+    allAnimals: [],
+    selectedAnimals:[]
+}
+export function animalReducer(state = initialState, {type, payload}){
     switch (type){
         case STORE_ANIMALS:
-            return payload.animalsList;
-        default:
-        return state;
-    }
-}
-
-export function selectedAnimalReducer(state = [], {type, payload}){
-    switch (type){
+            return {
+                ...state,
+                allAnimals:[...payload.animalsList]
+            }
+        
         case SELECT_ANIMAL:
-            return payload.selectedAnimalsList;
-        case REMOVE_ANIMAL:
-            console.log("Remove -> " + payload.selectedAnimalToRemove);
-            var animalToRemove = payload.selectedAnimalToRemove;
-            var index = state.indexOf(animalToRemove);
-            state.splice(index, 1);
-            return state;
+            return {
+                ...state,
+                selectedAnimals:[...state.selectedAnimals, payload.selectedAnimal]
+            }
+        case REMOVE_ANIMAL:           
+            return {
+                ...state,
+                selectedAnimals: Object.assign([], state.selectedAnimals).filter(animal => animal!== payload.animalToRemove)
+            }
         default:
         return state;
     }

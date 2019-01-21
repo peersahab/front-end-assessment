@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import {animalReducer, selectedAnimalReducer} from './animal-reducer';
+import {animalReducer} from './animal-reducer';
 const comReducer = combineReducers({
-animalsList: animalReducer,
-selectedAnimalsList: selectedAnimalReducer
+    animals: animalReducer
+// animalsList: animalReducer,
+// selectedAnimalsList: selectedAnimalReducer
 });
 
 export default comReducer;
